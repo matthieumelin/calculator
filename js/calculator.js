@@ -1,5 +1,15 @@
 create();
 
+export class Calculator {
+    constructor(displayValue = "0", firstOperator = null, waitForSecondOperator = false, operator = null) {
+        this.displayValue = displayValue;
+        this.firstOperator = firstOperator;
+        this.waitForSecondOperator = waitForSecondOperator;
+        this.operator = operator;
+    };
+
+};
+
 // create function
 function create() {
     // create main div
@@ -62,13 +72,13 @@ function create() {
     // append main div to body
     document.body.appendChild(calc);
 }
-
+////////////
 
 // input digit function
 function inputDigit(digit) {
     const { displayValue, waitForSecondOperator } = calculator;
 
-    if (calculator.waitForSecondOperator === true) {
+    if (waitForSecondOperator === true) {
         calculator.displayValue = digit;
         calculator.waitForSecondOperator = false;
     } else {
@@ -91,7 +101,7 @@ function inputDecimal(dot) {
 // handle operator function
 function handleOperator(nextOperator) {
     const { firstOperator, displayValue, operator } = calculator;
-    const inputValue = parseFloat(calculator.displayValue);
+    const inputValue = parseFloat(displayValue);
 
     if (operator && calculator.waitForSecondOperator) {
         this.operator = nextOperator;
@@ -135,7 +145,7 @@ function reset() {
 // update function
 function update() {
     const display = document.querySelector('.calc-screen');
-    display.value = this.displayValue;
+    display.value = displayValue;
 }
 
 function clickListener(event) {
@@ -163,13 +173,4 @@ function clickListener(event) {
             }
     }
     update();
-}
-
-export class Calculator {
-    constructor(displayValue = '0', firstOperator = null, waitForSecondOperator = false, operator = null) {
-        this.displayValue = displayValue;
-        this.firstOperator = firstOperator;
-        this.waitForSecondOperator = waitForSecondOperator;
-        this.operator = operator;
-    };
 }
